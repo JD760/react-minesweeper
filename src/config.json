@@ -1,0 +1,7 @@
+{
+    "gridSizes" : {
+        "easy": 8,
+        "normal": 12,
+        "hard": 20 
+    }
+}
