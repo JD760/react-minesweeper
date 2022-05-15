@@ -3,5 +3,10 @@
         "easy": 8,
         "normal": 12,
         "hard": 20 
+    },
+    "mineCount" : {
+        "easy": 16,
+        "normal": 80,
+        "hard": 240
     }
 }

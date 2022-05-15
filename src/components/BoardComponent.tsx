@@ -1,9 +1,10 @@
 import React from 'react';
+import '../styles/BoardComponent.css';
 
 class BoardComponent extends React.Component {
     render() {
         return(
-            <div>
+            <div className="board-container">
                 
             </div>
         )
