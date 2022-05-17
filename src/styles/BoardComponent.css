@@ -3,3 +3,13 @@
     width: 60vw;
     height: 60vh;
 }
+
+.board-item {
+    border: 1px solid red;
+    display: inline-block;
+}
+
+.board-tile {
+    border: 1px solid red;
+    display: inline-block;
+}

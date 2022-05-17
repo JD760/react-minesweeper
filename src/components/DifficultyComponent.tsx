@@ -1,61 +1,54 @@
-import React from 'react';
+import { useState } from "react";
+
 import '../styles/DifficultyComponent.css';
 
-type difficultyProps = {
-    handleClick(difficulty: string) : void
-};
+interface DifficultyComponentProps {
+    handleClick(difficulty: string): void
+}
 
-type difficultyState = {
-    buttonSelected: string,
-    myState: string
-};
+function DifficultyComponent (props: DifficultyComponentProps) {
+    const [buttonSelected, setButtonSelected] = useState("");
 
-class DifficultyComponent extends React.Component<difficultyProps, difficultyState> {
-    state: difficultyState = {
-        buttonSelected: "",
-        myState: "hello!"
+    const checkSelected = (button: string) : string => {
+        return (buttonSelected === button) ? "grey" : ""
     }
 
-    public checkSelected = (button: string) : string => {
-        return (this.state.buttonSelected === button) ? "grey" : ""
-    }
-
-    render() {
-        return(
+    return (
+        <div>
             <div>
                 <p className="difficulty-text">Game Difficulty:</p>
                 <div className="difficulty-selector">
                     <button 
                         className="difficulty-button"
-                        style={{backgroundColor: this.checkSelected("easy")}}
+                        style={{backgroundColor: checkSelected("easy")}}
                         onClick={() => {
-                            this.setState({buttonSelected: "easy"});
-                            this.props.handleClick("easy");
+                            setButtonSelected("easy");
+                            props.handleClick("easy");
                         }}
                     >Easy
                     </button>
                     <button
                         className="difficulty-button"
-                        style={{backgroundColor: this.checkSelected("normal")}}
+                        style={{backgroundColor: checkSelected("normal")}}
                         onClick={() => {
-                            this.setState({buttonSelected: "normal"});
-                            this.props.handleClick("normal");
+                            setButtonSelected("normal");
+                            props.handleClick("normal");
                         }}
                         >Normal
                     </button>
                     <button
                         className="difficulty-button"
-                        style={{backgroundColor: this.checkSelected("hard")}}
+                        style={{backgroundColor: checkSelected("hard")}}
                         onClick={() => {
-                            this.setState({buttonSelected: "hard"});
-                            this.props.handleClick("hard");
+                            setButtonSelected("hard");
+                            props.handleClick("hard");
                         }}
                         >Hard
                     </button>
                 </div>
             </div>
-        );
-    }
+        </div>
+    )
 }
 
 export default DifficultyComponent;
