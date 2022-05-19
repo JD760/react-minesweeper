@@ -41,6 +41,7 @@ function populateBoard(boardsize: number, mineCount: number) {
         if (i < tileCount - boardsize) {
             if (board[i + boardsize].isMine) currentTile.adjacent++;
         }
+        //TODO: Add Diagonals
     }
 
     /* Return the populated board array */

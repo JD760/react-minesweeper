@@ -12,7 +12,7 @@ import '../styles/GameComponent.css';
 import gameConfig from '../config.json';
 
 type gameProps = {
-
+    
 }
 
 type gameState = {
@@ -21,6 +21,7 @@ type gameState = {
     boardSize: number,
     boardMineCount: number,
     boardData: Tile[],
+    boardDataCreated: boolean
 }
 
 class GameComponent extends React.Component<gameProps, gameState> {
@@ -30,6 +31,7 @@ class GameComponent extends React.Component<gameProps, gameState> {
         boardSize: 0,
         boardMineCount: 0,
         boardData: [],
+        boardDataCreated: false
     }
 
     public handleDifficultyClick = (difficulty: string) => {
@@ -62,7 +64,7 @@ class GameComponent extends React.Component<gameProps, gameState> {
 
     public handleNewGameClick = () => {
         let board = populateBoard(this.state.boardSize, this.state.boardMineCount);
-        this.setState({boardData: board});
+        this.setState({boardData: board, boardDataCreated: true});
     }
 
     render() {
@@ -92,7 +94,8 @@ class GameComponent extends React.Component<gameProps, gameState> {
                 <BoardComponent board={{
                     size: this.state.boardSize,
                     mineCount: this.state.boardMineCount,
-                    data: this.state.boardData
+                    data: this.state.boardData,
+                    isPopulated: this.state.boardDataCreated
                 }}/>
             </div>
         );

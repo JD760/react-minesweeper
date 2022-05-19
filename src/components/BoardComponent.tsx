@@ -6,7 +6,8 @@ interface BoardComponentProps {
     board: {
         size: number,
         mineCount: number
-        data: Tile[]
+        data: Tile[],
+        isPopulated: boolean
     }
 }
 
@@ -33,6 +34,7 @@ function BoardComponent (props: BoardComponentProps) {
         // find the size in pixels for each tile
         let tileSize = {
             width: (((boardContainerSize.width - 2) / props.board.size) - 2).toString() + "px",
+            height: (((boardContainerSize.height - 2) / props.board.size) - 2).toString() + "px"
         };
         console.log(`Tilesize - x:${tileSize.width}`);
         return tileSize;
@@ -42,7 +44,12 @@ function BoardComponent (props: BoardComponentProps) {
     let tiles: JSX.Element[] = [];
     for (let i = 0; i < boardTileCount; i++) {
         tiles.push(
-            <div className="board-tile" style={createTileStyling()} key={i}>{props.board.data[i].adjacent}</div>
+            <div 
+                className="board-tile"
+                style={createTileStyling()}
+                key={i}
+            >{props.board.isPopulated ? (props.board.data[i].isMine ? "M" : props.board.data[i].adjacent) : 0}
+            </div>
         );
     }
 

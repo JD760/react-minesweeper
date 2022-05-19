@@ -48,7 +48,7 @@ function DifficultyComponent (props: DifficultyComponentProps) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default DifficultyComponent;
