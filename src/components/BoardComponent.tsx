@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Tile } from './utility/populateBoard';
 import '../styles/BoardComponent.css';
 
 interface BoardComponentProps {
     board: {
         size: number,
         mineCount: number
+        data: Tile[]
     }
 }
 
@@ -15,31 +17,36 @@ function BoardComponent (props: BoardComponentProps) {
     const boardTileCount = props.board.size * props.board.size;
     
     // handle sizing of the board container and tiles
-    const boardContainerRef = useRef(null);
+    const boardContainerRef = useRef<HTMLDivElement>(null);
+    const [boardContainerSize, setBoardContainerSize] = useState({width: 0, height: 0});
+
+    useEffect(() => {
+        if (boardContainerRef.current) {
+            let rect = boardContainerRef.current.getBoundingClientRect();
+            setBoardContainerSize({width: rect.width, height: rect.height});
+            console.log(`Board Container Size - x:${rect.width} y:${rect.height}`);
+        }
+    }, [boardContainerRef])
 
     // tile styling
     const createTileStyling = () => {
-        // percentage sizes to set the Tile elements to occupy
-        let TileSideLength = 10;
-        TileSideLength = ((1 / props.board.size) * 100);
-
-        return (
-            {
-                height : TileSideLength.toString() + "%",
-                width: TileSideLength.toString() + "%"
-            }
-        )
+        // find the size in pixels for each tile
+        let tileSize = {
+            width: (((boardContainerSize.width - 2) / props.board.size) - 2).toString() + "px",
+        };
+        console.log(`Tilesize - x:${tileSize.width}`);
+        return tileSize;
     }
 
     // create the tile elements on the board
     let tiles: JSX.Element[] = [];
     for (let i = 0; i < boardTileCount; i++) {
         tiles.push(
-            <div className="board-tile" style={createTileStyling()}>{i + 1}</div>
+            <div className="board-tile" style={createTileStyling()} key={i}>{props.board.data[i].adjacent}</div>
         );
     }
 
-    return <div className="board-container">
+    return <div className="board-container" ref={boardContainerRef}>
         {tiles}
     </div>
 }

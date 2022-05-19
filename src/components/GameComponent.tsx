@@ -91,7 +91,8 @@ class GameComponent extends React.Component<gameProps, gameState> {
 
                 <BoardComponent board={{
                     size: this.state.boardSize,
-                    mineCount: this.state.boardMineCount
+                    mineCount: this.state.boardMineCount,
+                    data: this.state.boardData
                 }}/>
             </div>
         );

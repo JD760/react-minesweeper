@@ -1,7 +1,9 @@
 .board-container {
     border: 1px solid green;
-    width: 60vw;
-    height: 60vh;
+    /*width: 60vw;
+    height: 60vh;*/
+    width: 800px;
+    height: 400px;
 }
 
 .board-item {
